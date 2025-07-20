@@ -20,6 +20,15 @@ function App() {
       };
     });
   }
+  // When cancel button Clicked
+  function handleCancelAddProject() {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+      };
+    });
+  }
 
   // Finish adding new projects
   function handleAddProject(projectData) {
@@ -37,12 +46,12 @@ function App() {
     });
   }
 
-  console.log(projectState);
-
   let content;
 
   if (projectState.selectedProjectId === null) {
-    content = <NewProject onAdd={handleAddProject} />;
+    content = (
+      <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
+    );
   } else if (projectState.selectedProjectId === undefined) {
     content = <NoprojectSelected onStartAddProject={handleStartAddProject} />;
   }
